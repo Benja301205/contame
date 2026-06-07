@@ -1,0 +1,25 @@
+<!-- @dsCard group="Brand" viewport="700x180" name="Wordmark" subtitle="Chili mark + Instrument Serif italic — the picante signature" -->
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8" />
+<link rel="stylesheet" href="../styles.css" />
+<style>
+  body { background: var(--bg); padding: 24px; display:flex; flex-direction:column; gap: 24px; justify-content:center; }
+  .brand { display:flex; align-items:center; gap: 14px; }
+  .mark { width: 40px; height: 40px; object-fit: contain; transform: rotate(-12deg); }
+  .name { font-family: var(--font-display); font-style: italic; font-weight: 400; font-size: 38px; letter-spacing: -0.01em; color: var(--ink); line-height: 1; }
+  .name sup { font-family: var(--font-mono); font-style: normal; font-size: 12px; letter-spacing:.16em; color: var(--hot); vertical-align: super; margin-left: 4px; }
+  .lockup { display:flex; align-items:center; gap: 10px; }
+  .dot { width: 7px; height:7px; border-radius:50%; background: var(--hot); box-shadow: var(--glow-dot); }
+  .small { font-family: var(--font-mono); font-size: 11px; letter-spacing:.22em; text-transform:uppercase; color: var(--ink-faint); }
+</style>
+</head>
+<body>
+  <div class="brand">
+    <img class="mark" src="../assets/chili.png" alt="contame" />
+    <span class="name">contame<sup>·</sup></span>
+  </div>
+  <div class="lockup"><span class="dot"></span><span class="small">contame · feedback que se lee</span></div>
+</body>
+</html>

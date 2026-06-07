@@ -1,0 +1,31 @@
+<!-- @dsCard group="Colors" viewport="700x170" name="Hairlines & glow" subtitle="Cream-at-low-alpha borders; orange glow is the depth cue" -->
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8" />
+<link rel="stylesheet" href="../styles.css" />
+<style>
+  body { background: var(--bg); padding: 20px; display:flex; gap:18px; align-items:stretch; }
+  .demo { flex:1; display:flex; flex-direction:column; gap:10px; justify-content:center; }
+  .box { height: 44px; border-radius: var(--radius-sm); }
+  .name { font-family: var(--font-mono); font-size: 11px; letter-spacing: .1em; text-transform: uppercase; color: var(--ink-dim); }
+  .glow-bar { height: 4px; background: var(--hot); border-radius: 2px; box-shadow: var(--glow-sm); width:70%; }
+  .dot { width: 10px; height:10px; border-radius:50%; background:var(--hot); box-shadow: var(--glow-dot); }
+</style>
+</head>
+<body>
+  <div class="demo">
+    <div class="box" style="border:1px solid var(--line)"></div>
+    <div class="name">--line · 0.10</div>
+    <div class="box" style="border:1px solid var(--line-strong)"></div>
+    <div class="name">--line-strong · 0.22</div>
+  </div>
+  <div class="demo">
+    <div class="glow-bar"></div>
+    <div class="name">--glow-sm · meter bar</div>
+    <div style="display:flex; align-items:center; gap:10px; margin-top:6px;"><span class="dot"></span><span class="name">--glow-dot · live</span></div>
+    <div class="box" style="background:var(--hot); box-shadow:var(--glow-lg); width:60%;"></div>
+    <div class="name">--glow-lg · active pill</div>
+  </div>
+</body>
+</html>

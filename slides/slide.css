@@ -1,0 +1,28 @@
+/* ============================================================
+   contame · Sample slides — shared 16:9 frame + atmosphere
+   Each slide is a 1280×720 poster on the lit-ember canvas.
+   Tokens come from ../styles.css.
+   ============================================================ */
+
+.slide {
+  position: relative; width: 1280px; height: 720px; overflow: hidden;
+  background: var(--bg); color: var(--ink);
+  padding: 72px 88px; display: flex; flex-direction: column;
+}
+.slide::before { content: ""; position: absolute; inset: 0; background: var(--wash-hero); pointer-events: none; z-index: 0; }
+.slide::after { content: ""; position: absolute; inset: 0; opacity: var(--noise-opacity); mix-blend-mode: overlay; background-image: var(--noise-url); pointer-events: none; z-index: 1; }
+.slide > * { position: relative; z-index: 2; }
+
+/* top brand rail */
+.slide-brand { display: flex; align-items: center; gap: 10px; }
+.slide-brand img { width: 28px; height: 28px; object-fit: contain; transform: rotate(-12deg); }
+.slide-brand .name { font-family: var(--font-display); font-style: italic; font-size: 24px; color: var(--ink); line-height: 1; }
+.slide-brand .name sup { font-family: var(--font-mono); font-style: normal; font-size: 10px; letter-spacing: 0.16em; color: var(--hot); vertical-align: super; margin-left: 3px; }
+
+.slide-eyebrow { font-family: var(--font-mono); font-size: 14px; letter-spacing: 0.18em; text-transform: uppercase; color: var(--ink-dim); }
+.slide-foot { font-family: var(--font-mono); font-size: 12px; letter-spacing: 0.16em; text-transform: uppercase; color: var(--ink-faint); display: flex; justify-content: space-between; }
+
+.poster-h { font-family: var(--font-condensed); font-weight: 400; text-transform: uppercase; line-height: 0.86; letter-spacing: -0.01em; }
+.poster-h em { font-family: var(--font-display); font-style: italic; text-transform: none; color: var(--hot); letter-spacing: -0.02em; }
+
+.spacer { flex: 1; }

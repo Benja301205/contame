@@ -1,0 +1,21 @@
+<!-- @dsCard group="Spacing" viewport="700x180" name="Radii" subtitle="Hard edges are on-brand; pills are the one round exception" -->
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8" />
+<link rel="stylesheet" href="../styles.css" />
+<style>
+  body { background: var(--bg); padding: 22px 24px; display:flex; gap: 20px; align-items:flex-end; }
+  .col { display:flex; flex-direction:column; gap: 10px; align-items:center; }
+  .box { width: 86px; height: 64px; background: var(--bg-2); border: 1px solid var(--line-strong); }
+  .n { font-family: var(--font-mono); font-size: 10px; letter-spacing:.08em; text-transform:uppercase; color: var(--ink-dim); text-align:center; }
+  .pill { width: 150px; height: 48px; background: var(--hot); border-radius: 999px; display:flex; align-items:center; justify-content:center; font-family: var(--font-mono); font-size: 11px; letter-spacing:.16em; text-transform:uppercase; color: var(--bg); }
+</style>
+</head>
+<body>
+  <div class="col"><div class="box" style="border-radius:0"></div><div class="n">0 · default</div></div>
+  <div class="col"><div class="box" style="border-radius:var(--radius-sm)"></div><div class="n">sm · 4</div></div>
+  <div class="col"><div class="box" style="border-radius:var(--radius-lg)"></div><div class="n">lg · 12</div></div>
+  <div class="col"><div class="pill">empezar</div><div class="n">pill · 999</div></div>
+</body>
+</html>

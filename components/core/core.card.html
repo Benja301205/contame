@@ -1,0 +1,57 @@
+<!-- @dsCard group="Components" viewport="700x300" name="Core — Eyebrow, Badge, Card, SegmentNav" subtitle="Kickers, status pills, severity tags, hairline cards & segmented nav" -->
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8" />
+<link rel="stylesheet" href="../../styles.css" />
+<style>
+  body { background: var(--bg); padding: 26px; }
+  .stack { display: flex; flex-direction: column; gap: 22px; }
+  .row { display: flex; gap: 14px; align-items: center; flex-wrap: wrap; }
+  .cap { font-family: var(--font-mono); font-size: 10px; letter-spacing:.14em; text-transform:uppercase; color: var(--ink-faint); margin-bottom: 10px; }
+  .cards { display: grid; grid-template-columns: 1fr 1fr; gap: 16px; }
+  h3 { font-family: var(--font-display); font-style: italic; font-size: 28px; color: var(--ink); font-weight: 400; margin-top: 4px; }
+</style>
+</head>
+<body>
+  <div id="root"></div>
+  <script src="https://unpkg.com/react@18.3.1/umd/react.development.js" integrity="sha384-hD6/rw4ppMLGNu3tX5cjIb+uRZ7UkRJ6BPkLpg4hAu/6onKUg4lLsHAs9EBPT82L" crossorigin="anonymous"></script>
+  <script src="https://unpkg.com/react-dom@18.3.1/umd/react-dom.development.js" integrity="sha384-u6aeetuaXnQ38mYT8rp6sbXaQe3NL9t+IBXmnYxwkUI2Hw4bsp2Wvmx4yRQF1uAm" crossorigin="anonymous"></script>
+  <script src="https://unpkg.com/@babel/standalone@7.29.0/babel.min.js" integrity="sha384-m08KidiNqLdpJqLq95G/LEi8Qvjl/xUYll3QILypMoQ65QorJ9Lvtp2RXYGBFj1y" crossorigin="anonymous"></script>
+  <script src="../../_ds_bundle.js"></script>
+  <script type="text/babel">
+    const { Eyebrow, Badge, Card, SegmentNav } = window.ContameDesignSystem_8cf950;
+    function Demo() {
+      const [view, setView] = React.useState("2026");
+      return (
+        <div className="stack">
+          <div className="row">
+            <Eyebrow dot tone="hot">En vivo</Eyebrow>
+            <Badge status="online">En línea</Badge>
+            <Badge status="offline">Sin conexión</Badge>
+            <Badge variant="tag" tone="alta">Alta</Badge>
+            <Badge variant="tag" tone="media">Media</Badge>
+            <Badge variant="tag" tone="soft">Nuevo</Badge>
+          </div>
+          <SegmentNav value={view} onChange={setView} items={[
+            { value: "2026", label: "Edición 2026" },
+            { value: "comp", label: "Comparativa" },
+            { value: "2025", label: "Edición 2025" },
+          ]} />
+          <div className="cards">
+            <Card accent fill="gradient" padding={24}>
+              <Eyebrow>Pulso · 14 días</Eyebrow>
+              <h3>Lardito</h3>
+            </Card>
+            <Card fill="fill" padding={24}>
+              <Eyebrow>Reseñas</Eyebrow>
+              <h3>4.6★</h3>
+            </Card>
+          </div>
+        </div>
+      );
+    }
+    ReactDOM.createRoot(document.getElementById("root")).render(<Demo />);
+  </script>
+</body>
+</html>

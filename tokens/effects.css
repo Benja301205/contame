@@ -1,0 +1,79 @@
+/* ============================================================
+   contame · Effects — shadows, glows, textures, motion
+   ------------------------------------------------------------
+   The brand has almost no drop-shadows. Depth comes from:
+   · GLOW (orange box-shadow on active bars/dots/pills)
+   · radial gradient washes behind hero content
+   · a fine film-grain noise overlay on the page
+   · 1px hairline borders
+   Motion is calm: 0.18s ease-ish transitions, gentle bobs,
+   one slow rotating arched label. No bounces.
+   ============================================================ */
+
+:root {
+  /* ---- Glow shadows (the signature depth cue) ---- */
+  --glow-sm:   0 0 8px var(--hot);                 /* meter bars */
+  --glow-md:   0 0 12px var(--hot);                /* progress fill, dots */
+  --glow-lg:   0 0 18px rgba(255, 69, 0, 0.40);    /* active pill */
+  --glow-dot:  0 0 10px var(--hot);                /* status / brand dot */
+
+  /* ---- Rare real shadow (floating toast only) ---- */
+  --shadow-float: 0 12px 40px rgba(0, 0, 0, 0.40);
+
+  /* ---- Radial background washes ---- */
+  --wash-hero:
+    radial-gradient(ellipse 90% 60% at 50% 0%, var(--glow-hot), transparent 60%),
+    radial-gradient(ellipse 60% 50% at 100% 100%, var(--glow-deep), transparent 60%);
+  --wash-card:
+    radial-gradient(circle at 50% 50%, var(--glow-flame),
+      rgba(255, 69, 0, 0.04) 50%, transparent 75%);
+  --gradient-flame: linear-gradient(180deg, var(--hot-2), var(--hot-deep));
+  --gradient-card:  linear-gradient(160deg, var(--bg-2), var(--bg));
+
+  /* ---- Film-grain noise (apply as ::after overlay) ---- */
+  --noise-url: url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='200' height='200'><filter id='n'><feTurbulence type='fractalNoise' baseFrequency='0.85' numOctaves='2' stitchTiles='stitch'/><feColorMatrix values='0 0 0 0 1  0 0 0 0 1  0 0 0 0 1  0 0 0 0.7 0'/></filter><rect width='200' height='200' filter='url(%23n)'/></svg>"); /* @kind other */
+  --noise-opacity: 0.18; /* @kind other */
+
+  /* ---- Backdrop blur (sticky nav backing) ---- */
+  --blur: 10px; /* @kind other */
+
+  /* ---- Motion ---- */
+  --ease:       cubic-bezier(0.4, 0, 0.2, 1); /* @kind other */
+  --dur-fast:   0.18s; /* @kind other */
+  --dur-mid:    0.3s; /* @kind other */
+  --dur-slow:   0.4s; /* @kind other */
+  --dur-spin: 38s; /* @kind other */
+  --dur-bob: 6s; /* @kind other */
+}
+
+/* ============================================================
+   Reusable utility: page noise + glow wash overlay.
+   Add class="contame-atmosphere" to <body> (or a full-bleed
+   wrapper) to reproduce the signature lit-ember background.
+   ============================================================ */
+.contame-atmosphere::before {
+  content: "";
+  position: fixed;
+  inset: 0;
+  pointer-events: none;
+  z-index: 1;
+  background: var(--wash-hero);
+}
+.contame-atmosphere::after {
+  content: "";
+  position: fixed;
+  inset: 0;
+  pointer-events: none;
+  z-index: 2;
+  opacity: var(--noise-opacity);
+  mix-blend-mode: overlay;
+  background-image: var(--noise-url);
+}
+.contame-atmosphere > * {
+  position: relative;
+  z-index: 3;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  :root { --dur-spin: 0s /* @kind other */; --dur-bob: 0s /* @kind other */; }
+}

@@ -1,0 +1,14 @@
+/* ============================================================
+   contame · Webfonts
+   ------------------------------------------------------------
+   The four type families are all genuine Google Fonts, loaded
+   here from the Google Fonts CDN (the @import pulls in the real
+   @font-face declarations for each weight/style).
+
+   · Instrument Serif  — display / editorial italic accents
+   · Space Grotesk     — UI + body sans
+   · JetBrains Mono    — eyebrows, labels, numeric meta
+   · Bebas Neue        — condensed poster headlines
+   ============================================================ */
+
+@import url("https://fonts.googleapis.com/css2?family=Instrument+Serif:ital@0;1&family=Space+Grotesk:wght@300;400;500;600;700&family=JetBrains+Mono:wght@400;500&family=Bebas+Neue&display=swap");

@@ -1,0 +1,19 @@
+<!-- @dsCard group="Brand" viewport="700x150" name="Gradient washes" subtitle="Flame gradient, card gradient & radial card glow" -->
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8" />
+<link rel="stylesheet" href="../styles.css" />
+<style>
+  body { background: var(--bg); padding: 20px; display:flex; gap: 14px; }
+  .sw { flex:1; }
+  .chip { height: 78px; border-radius: var(--radius-sm); border: 1px solid var(--line); }
+  .name { font-family: var(--font-mono); font-size: 10px; letter-spacing:.1em; text-transform:uppercase; color: var(--ink-dim); margin-top: 10px; }
+</style>
+</head>
+<body>
+  <div class="sw"><div class="chip" style="background:var(--gradient-flame)"></div><div class="name">--gradient-flame</div></div>
+  <div class="sw"><div class="chip" style="background:var(--gradient-card)"></div><div class="name">--gradient-card</div></div>
+  <div class="sw"><div class="chip" style="background:var(--bg-2); position:relative; overflow:hidden;"><span style="position:absolute; inset:0; background:var(--wash-card);"></span></div><div class="name">--wash-card</div></div>
+</body>
+</html>

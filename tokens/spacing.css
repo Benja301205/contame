@@ -1,0 +1,45 @@
+/* ============================================================
+   contame · Spacing & radius tokens
+   ------------------------------------------------------------
+   Roomy, editorial spacing. Sections breathe (56–88px gaps);
+   cards use 24–32px internal padding. Radii are restrained:
+   the brand favors HARD edges (1px hairlines, square cards)
+   with one exception — fully-rounded pill controls.
+   ============================================================ */
+
+:root {
+  /* ---- Spacing scale ---- */
+  --space-1:  4px;
+  --space-2:  8px;
+  --space-3:  12px;
+  --space-4:  16px;
+  --space-5:  20px;
+  --space-6:  24px;
+  --space-7:  28px;
+  --space-8:  32px;
+  --space-10: 40px;
+  --space-12: 48px;
+  --space-14: 56px;
+  --space-18: 72px;
+  --space-22: 88px;
+
+  /* ---- Semantic spacing ---- */
+  --pad-card:        28px;   /* default card padding */
+  --pad-card-lg:     32px;
+  --gap-section:     56px;   /* space before a new section head */
+  --gap-section-lg:  88px;   /* deep chapter break */
+  --gap-grid:        24px;   /* default grid gap */
+  --gap-grid-hair:   1px;    /* hairline-separated grid (cells on --line bg) */
+
+  /* ---- Page gutters ---- */
+  --gutter:    clamp(20px, 4vw, 56px); /* @kind spacing */
+  --max-page:  1320px;
+  --max-read:  56ch;
+
+  /* ---- Radius (restrained — hard edges are on-brand) ---- */
+  --radius-xs:   2px;  /* meter tracks */
+  --radius-sm:   4px;  /* heat cells, small chips */
+  --radius-md:   8px;
+  --radius-lg:   12px; /* default --radius from shadcn layer (0.75rem) */
+  --radius-pill: 999px; /* CTA stamps, nav segments, status pills */
+}

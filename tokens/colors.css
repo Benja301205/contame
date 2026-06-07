@@ -1,0 +1,70 @@
+/* ============================================================
+   contame · Color tokens
+   ------------------------------------------------------------
+   A warm, near-black "ember" palette. Backgrounds are deep
+   roasted reds (never neutral grey), text is a warm cream, and
+   a single hot orange ("picante") carries every accent.
+   Think: a dark room lit by embers.
+   ============================================================ */
+
+:root {
+  /* ---- Surfaces (warm dark, roasted-chili browns) ---- */
+  --bg:        #1a0908; /* page base — deepest ember */
+  --bg-2:      #2a1311; /* raised surface / card fill */
+  --bg-3:      #381916; /* highest surface / hover fill */
+
+  /* ---- Ink (warm cream → faint) ---- */
+  --ink:       #f5ede1; /* primary text */
+  --ink-dim:   #b8a89e; /* secondary text, labels */
+  --ink-faint: #6b5b52; /* tertiary, disabled, hairline captions */
+
+  /* ---- Hot / picante (the one accent that matters) ---- */
+  --hot:       #ff4500; /* primary accent — orange-red */
+  --hot-2:     #ff7a3c; /* lighter flame (gradient top) */
+  --hot-deep:  #c43201; /* deep ember (gradient bottom, press) */
+  --ember:     #ffb86b; /* warm amber — secondary highlight */
+
+  /* Alternate hot ramp used on marketing/landing surfaces */
+  --hot-warm:      #f04e23;
+  --hot-warm-2:    #f07545;
+  --hot-warm-deep: #c43315;
+  --ember-soft:    #ffa870;
+
+  /* ---- Semantic status ---- */
+  --positive: #87d68b; /* promoters / good */
+  --positive-glow: #6ddf6d;
+  --warning:  #ffb86b; /* passives / caution (== ember) */
+  --negative: #ff4500; /* detractors / problems (== hot) */
+  --destructive: #e5332a;
+
+  /* ---- Hairlines & dividers (cream at low alpha) ---- */
+  --line:        rgba(245, 237, 225, 0.10);
+  --line-strong: rgba(245, 237, 225, 0.22);
+
+  /* ---- Glow tints (for radial bg washes & shadows) ---- */
+  --glow-hot:   rgba(255, 69, 0, 0.12);
+  --glow-deep:  rgba(196, 50, 1, 0.10);
+  --glow-flame: rgba(255, 120, 60, 0.14);
+
+  /* ============================================================
+     Semantic aliases — prefer these in components
+     ============================================================ */
+  --surface-page:    var(--bg);
+  --surface-raised:  var(--bg-2);
+  --surface-hover:   var(--bg-3);
+  --surface-card:    rgba(42, 19, 17, 0.40); /* translucent card over glow */
+
+  --text-strong:  var(--ink);
+  --text-body:    var(--ink-dim);
+  --text-muted:   var(--ink-faint);
+  --text-accent:  var(--hot);
+
+  --accent:        var(--hot);
+  --accent-hover:  var(--hot-2);
+  --accent-press:  var(--hot-deep);
+  --on-accent:     var(--bg);   /* text/icon sitting on a hot fill */
+
+  --border:        var(--line);
+  --border-strong: var(--line-strong);
+  --focus-ring:    var(--hot);
+}

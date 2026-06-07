@@ -1,0 +1,64 @@
+/* ============================================================
+   contame · Analytics dashboard — screen layout CSS
+   Layout-only; tokens come from ../../styles.css. Composes the
+   bundle components (SegmentNav, StatCard, MetricBar, Card,
+   Quote, Eyebrow, Badge).
+   ============================================================ */
+
+.dash { position: relative; z-index: 3; min-height: 100vh; }
+.dash-bg::before { content: ""; position: fixed; inset: 0; pointer-events: none; z-index: 1; background: var(--wash-hero); }
+.dash-bg::after { content: ""; position: fixed; inset: 0; pointer-events: none; z-index: 2; opacity: var(--noise-opacity); mix-blend-mode: overlay; background-image: var(--noise-url); }
+
+.dash-page { position: relative; z-index: 3; padding: clamp(20px,3vw,40px) var(--gutter) 24px; max-width: var(--max-page); margin: 0 auto; }
+
+/* ---- Sticky edition bar ---- */
+.edition-nav { display: flex; justify-content: space-between; align-items: center; gap: 16px; margin-bottom: 36px; position: sticky; top: 0; z-index: 20; padding: 16px 0 14px; }
+.edition-nav::before { content: ""; position: absolute; top: 0; bottom: 0; left: 50%; width: 100vw; transform: translateX(-50%); background: rgba(26,9,8,0.5); backdrop-filter: blur(var(--blur)); -webkit-mask-image: linear-gradient(180deg,#000 52%,transparent); mask-image: linear-gradient(180deg,#000 52%,transparent); pointer-events: none; z-index: -1; }
+.edition-brand { display: inline-flex; align-items: center; gap: 10px; }
+.edition-brand img { width: 26px; height: 26px; object-fit: contain; transform: rotate(-12deg); }
+.edition-brand span { font-family: var(--font-display); font-style: italic; font-size: 22px; color: var(--ink); line-height: 1; }
+@media (max-width: 700px) { .edition-brand span { display: none; } }
+
+/* ---- Hero ---- */
+.dash-hero { display: grid; grid-template-columns: 1.4fr 1fr; gap: 44px; padding-bottom: 40px; border-bottom: 1px solid var(--line); margin-bottom: 16px; align-items: end; }
+@media (max-width: 880px) { .dash-hero { grid-template-columns: 1fr; gap: 28px; } }
+.dash-title { font-family: var(--font-condensed); font-size: clamp(56px,9vw,120px); line-height: 0.86; text-transform: uppercase; }
+.dash-title em { font-family: var(--font-display); font-style: italic; text-transform: none; color: var(--hot); }
+.dash-sub { font-family: var(--font-display); font-style: italic; font-size: 22px; color: var(--ink-dim); margin-top: 12px; }
+
+/* ---- Section heads ---- */
+.section-head { display: flex; justify-content: space-between; align-items: baseline; margin: 48px 0 24px; gap: 24px; flex-wrap: wrap; }
+.section-head h2 { font-family: var(--font-condensed); font-size: clamp(34px,5vw,52px); line-height: 0.95; text-transform: uppercase; font-weight: 400; }
+.section-head h2 em { font-family: var(--font-display); font-style: italic; text-transform: none; color: var(--hot); }
+.section-head .num { font-family: var(--font-mono); font-size: 11px; letter-spacing: 0.16em; text-transform: uppercase; color: var(--ink-dim); }
+
+.metric-list { border-top: 1px solid var(--line); }
+
+/* ---- Team / pain cards (big italic counts) ---- */
+.count-grid { display: grid; grid-template-columns: repeat(2, 1fr); gap: var(--gap-grid); }
+@media (max-width: 700px) { .count-grid { grid-template-columns: 1fr; } }
+.count-num { font-family: var(--font-display); font-style: italic; font-size: 64px; line-height: 0.88; color: var(--hot); }
+.count-num small { font-family: var(--font-mono); font-style: normal; font-size: 11px; letter-spacing: 0.14em; text-transform: uppercase; color: var(--ink-dim); margin-left: 8px; vertical-align: middle; }
+.count-cat { font-family: var(--font-mono); font-size: 11px; letter-spacing: 0.14em; text-transform: uppercase; color: var(--ink-dim); margin: 12px 0 8px; }
+.count-quote { font-family: var(--font-display); font-style: italic; font-size: 15px; line-height: 1.45; color: var(--ink-dim); border-left: 2px solid var(--hot); padding-left: 14px; }
+
+/* ---- Hairline pain grid (cells on a --line background) ---- */
+.pain-grid { display: grid; grid-template-columns: repeat(2,1fr); gap: 1px; background: var(--line); }
+@media (max-width: 700px) { .pain-grid { grid-template-columns: 1fr; } }
+.pain-cell { background: var(--bg); padding: 26px 22px; display: flex; flex-direction: column; gap: 8px; }
+
+/* ---- Distribution / mentions bars ---- */
+.dist-list { display: flex; flex-direction: column; gap: 14px; border-top: 1px solid var(--line); padding-top: 22px; }
+.dist-row { display: grid; grid-template-columns: 1fr 200px 40px; align-items: center; gap: 20px; }
+@media (max-width: 700px) { .dist-row { grid-template-columns: 1fr 90px 36px; gap: 12px; } }
+.dist-label { font-size: 15px; color: var(--ink); }
+.dist-track { height: 5px; background: var(--line); position: relative; overflow: hidden; border-radius: var(--radius-xs); }
+.dist-bar { position: absolute; inset: 0 auto 0 0; background: var(--hot); border-radius: var(--radius-xs); }
+.dist-count { font-family: var(--font-mono); font-size: 12px; letter-spacing: 0.1em; color: var(--ink-dim); text-align: right; }
+
+.quotes { display: grid; grid-template-columns: 1fr 1fr; gap: 32px; }
+@media (max-width: 760px) { .quotes { grid-template-columns: 1fr; } }
+
+/* ---- Footer ---- */
+.dash-footer { margin-top: 64px; padding: 24px 0 40px; border-top: 1px solid var(--line); display: flex; justify-content: space-between; align-items: center; font-family: var(--font-mono); font-size: 11px; letter-spacing: 0.14em; text-transform: uppercase; color: var(--ink-faint); flex-wrap: wrap; gap: 12px; }
+.dash-footer b { color: var(--hot); font-weight: 500; }
