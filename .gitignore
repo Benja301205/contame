@@ -1,0 +1,4 @@
+# Build artifacts / deps (no deberían entrar nunca)
+node_modules/
+.next/
+.DS_Store

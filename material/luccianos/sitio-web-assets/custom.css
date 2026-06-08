@@ -1,0 +1,865 @@
+@media screen and (max-width: 800px) {
+  #main-menu {
+    padding: 90px 0;
+  }
+}
+
+.geladots-hero {
+    height: 100vh;
+    position: relative;
+    overflow: hidden;
+}
+
+.geladots-hero-bg {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-size: cover;
+    background-position: center;
+}
+
+.geladots-hero-content {
+    position: relative;
+    z-index: 1;
+    height: 100%;
+    display: flex;
+    align-items: flex-start;
+    justify-content: center;
+}
+
+.geladots-hero-img {
+    width: 80%;
+    max-width: 393px;
+    position: relative;
+    top: 230px;
+}
+
+.geladots-ohmydot {
+    background: #000;
+    color: #fff;
+    text-align: center;
+    padding: 60px 20px 80px;
+    overflow: hidden;
+    height: 700px;
+}
+
+.geladots-sello {
+    width: 60px;
+    margin-bottom: 30px;
+}
+
+.geladots-ohmydot-title { 
+    font-weight: 900;
+    text-transform: uppercase;
+    margin-bottom: 40px;
+    line-height: 1;
+    text-align: center;
+}
+
+.geladots-ohmydot-title p {
+    color: #FFF;
+    text-align: center;
+    font-family: Calibre;
+    font-size: 56px;
+    font-style: italic;
+    font-weight: 300;
+    line-height: 80px;
+}
+
+.geladots-ohmydot-title p span {
+    font-weight: 900;
+    line-height: 80px;
+}
+
+.geladots-bombon-wrap {
+    width: 250px;
+    height: 250px;
+    margin: 0 auto 50px;
+}
+
+.geladots-bombon {
+    width: 100%;
+    border-radius: 50%;
+}
+
+.geladots-cta {
+    display: inline-block;
+    border: 1px solid #fff;
+    background: transparent;
+    color: #fff;
+    letter-spacing: 2px;
+    width: 90%;
+    max-width: 350px;
+    text-align: center;
+    padding: 18px 35px 14px;
+    border-radius: 100px;
+    font-family: Calibre, sans-serif;
+    font-weight: 700;
+    text-decoration: none;
+    transition: .3s;
+    font-family: Calibre;
+    font-size: 16px;
+    font-style: normal;
+    font-weight: 600;
+    line-height: 20px;
+}
+
+.geladots-cta:hover {
+    background: #fff;
+    color: #000;
+}
+
+.geladots-variedades {
+    background: #fff;
+    overflow: hidden;
+}
+
+.geladots-new-banner {
+    background-image: url('../assets/img/geladots/backgroundSliderTitle.png');
+    background-repeat: round;
+    color: #fff;
+    letter-spacing: 2px;
+    padding: 12px 0;
+    white-space: nowrap;
+    text-align: center;
+    height: 48px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-family: Calibre;
+    font-size: 25px!important;
+    font-style: normal;
+    font-weight: 600;
+    line-height: 32px;
+}
+
+.geladots-variedades-inner {
+    padding: 50px 20px;
+    text-align: center;
+    background-color: #F8F9FC;
+}
+
+.geladots-variedades-title,
+.geladots-variedades-title-strong {
+    color: #222;
+    text-align: center;
+    font-family: Calibre;
+    font-size: 56px;
+    font-style: normal;
+    font-weight: 300;
+    line-height: 56px;
+    letter-spacing: 0.2px;
+}
+
+.geladots-variedades-title-strong {
+   font-weight: 700;
+}
+
+.root-title {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+}
+
+.geladots-swiper {
+    margin-bottom: 30px;
+}
+
+.geladots-swiper .swiper-slide {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 100% !important;
+    margin-bottom: -70px;
+}
+
+.geladots-swiper .swiper-slide .img-small-l,
+.geladots-swiper .swiper-slide .img-small-r  {
+    width: 200px;
+    height: 300px;
+    border-radius: 50%;
+    display: block;
+    object-fit: cover;
+    border: none;
+    position: relative;
+}
+
+.geladots-swiper .swiper-slide .img-small-l {
+   left: 14px;
+}
+
+.geladots-swiper .swiper-slide .img-small-r {
+   left: -14px; 
+}
+
+.geladots-pagination {
+    position: relative !important;
+    margin-top: 20px;
+}
+
+.geladots-pagination .swiper-pagination-bullet {
+    background: #222;
+    opacity: 0.3;
+}
+
+.geladots-pagination .swiper-pagination-bullet-active {
+    opacity: 1;
+    width: 24px;
+    border-radius: 4px;
+}
+
+.geladots-big-title {
+    color: #1A1A1A;
+    font-family: Calibre;
+    font-size: 73px;
+    font-style: normal;
+    font-weight: 900;
+}
+
+.geladots-bottom-text p {
+    color: #1A1A1A;
+    text-align: center;
+    font-family: Calibre;
+    font-size: 18px;
+    font-style: normal;
+    font-weight: 600;
+    line-height: 24px;
+    letter-spacing: 0.2px;
+}
+
+.geladots-video-section {
+    overflow: hidden;
+    height: 60vh;
+}
+
+.geladots-video {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    display: block;
+    margin-bottom: 0;
+}
+
+.geladots-anatomy {
+    background: #111;
+    color: #fff;
+    height: 500px;
+    padding: 60px 20px;
+}
+
+.geladots-anatomy-title {
+    font-size: 38px;
+    line-height: 1.1;
+    text-transform: uppercase;
+    margin-bottom: 40px;
+    letter-spacing: -1px;
+}
+
+.geladots-anatomy-title em {
+    font-style: italic;
+    font-weight: 400;
+}
+
+.geladots-anatomy-title strong {
+    font-weight: 900;
+    font-style: normal;
+}
+
+.geladots-anatomy-bombon {
+    position: relative;
+    display: flex;
+    align-items: center;
+    gap: 10px;
+}
+
+.geladots-anatomy-img {
+    width: 500px;
+    border-radius: 50%;
+    flex-shrink: 0;
+    position: relative;
+    left: -60px;
+}
+
+.geladots-anatomy-lines {
+    flex: 1;
+    padding-left: 0;
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+    position: relative;
+    left: -180px;
+}
+
+.anatomy-item {
+    display: flex;
+    align-items: center;
+    gap: 6px;
+}
+
+.anatomy-line {
+    width: 30px;
+    height: 1px;
+    background: #fff;
+    opacity: 0.6;
+    flex-shrink: 0;
+}
+
+.anatomy-item.item-1 .anatomy-line {
+    width: 60px;
+    background: #00e5ff;
+    opacity: 1;
+    position: relative;
+    left: -4%;
+    margin-right: -14px;
+}
+
+.anatomy-item.item-2 .anatomy-line {
+    width: 50px;
+    background: #ffe000;
+    opacity: 1;
+    position: relative;
+    left: 5%;
+}
+
+.anatomy-item.item-3 .anatomy-line {
+    width: 40px;
+    background: #ff00cc;
+    opacity: 1;
+    position: relative;
+    left: 3%;
+}
+
+.anatomy-item.item-4 .anatomy-line {
+    width: 30px;
+    background: #00ff88;
+    opacity: 1;
+    position: relative;
+    left: -2%;
+    margin-right: -9px;
+}
+
+.anatomy-dot {
+    border-radius: 50%;
+    flex-shrink: 0;
+    width: 6px;
+    height: 6px;
+}
+
+.anatomy-item p {
+    font-size: 12px;
+    letter-spacing: 0.3px;
+    line-height: 1.3;
+    margin: 0;
+    color: #fff;
+    text-transform: none;
+    min-width: 100px;
+}
+
+.geladots-variedades-title-white,
+.geladots-variedades-title-strong-white {
+    color: #FFF;
+    text-align: center;
+    font-family: Calibre;
+    font-size: 56px;
+    font-style: italic;
+    font-weight: 300;
+    line-height: 64px;
+    text-transform: uppercase;
+}
+
+.geladots-variedades-title-strong-white {
+    color: #FFF;
+    font-family: Calibre;
+    font-size: 80px;
+    font-weight: 900;
+}
+
+.geladots-img-final {
+    overflow: hidden;
+}
+
+.geladots-img-final-img {
+    width: 100%;
+    display: block;
+    max-height: 470px;
+    object-fit: cover;
+}
+
+.desktop-bg {
+    display: none;
+}
+
+.geladots-grid-desktop {
+    display: none;
+}
+
+@media screen and (min-width: 800px) {
+    .main-menu-inner {
+        text-align: left !important;
+        width: calc(100% - 240px);
+    }
+
+    .main-menu-images {
+        right: auto !important;
+        left: 350px !important;
+    }
+
+    .menu-item span {
+        text-align: left!important;
+        padding-left: 0 !important;
+        padding-right: 30px !important;
+    }
+
+    .menu-item::before {
+        left: -5% !important;
+        right: auto !important;
+    }
+
+    .menu-item span::after {
+        left: auto !important;
+        right: 12px !important;
+    }
+
+    #main-menu {
+        overflow: hidden !important;
+    }
+
+    .main-menu-inner {
+        overflow: hidden !important;
+    }
+
+    .main-social {
+        left: auto !important;
+        right: 0 !important;
+    }
+
+    .main-social {
+        left: auto !important;
+        right: 100px!important;
+        bottom: 80px !important;
+        width: 120px;
+    }
+
+    .main-social .inner {
+        max-width: 250px;
+    }   
+}
+
+@media screen and (min-width: 1100px) {
+    .geladots-video-section {
+        overflow: hidden;
+        max-height: 90vh;
+        height: 90vh;
+    }
+
+    .geladots-video {
+        width: 100%;
+        display: block;
+        margin-bottom: -40px;
+    }
+
+    .mobile-bg {
+        display: none;
+    }
+
+    .desktop-bg {
+        display: block;
+        background-position: center center;
+        background-size: cover;
+    }
+
+    .geladots-hero-content {
+        align-items: flex-start;
+        padding-top: 150px;
+    }
+
+    .geladots-hero-img {
+        max-width: 500px;
+        top: 0;
+    }
+
+    .geladots-ohmydot {
+        display: flex;
+        flex-direction: column;
+        align-items: flex-start;
+        justify-content: center;
+        padding: 80px 100px;
+        height: 461px;
+        position: relative;
+        text-align: left;
+    }
+
+    .geladots-sello {
+        width: 70px;
+        margin-bottom: 20px;
+    }
+
+    .geladots-ohmydot-title p {
+        font-size: 120px;
+        position: relative;
+        top: 25px;
+    }
+
+    .geladots-bombon-wrap {
+        position: absolute;
+        right: 22%;
+        top: 82%;
+        z-index: 10;
+        transform: translateY(-50%);
+        width: 350px;
+        height: 350px;
+        margin: 0;
+    }
+
+    .oh-my-dot-root {
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+    }
+
+    .geladots-ohmydot {
+        overflow: visible;
+    }
+
+    .geladots-cta {
+        width: auto;
+        margin-top: 20px;
+        font-size: 20px;
+        font-style: normal;
+        font-weight: 600;
+        line-height: 20px; 
+    }
+
+    .geladots-variedades-inner {
+        padding: 100px 20px;
+    }
+
+    .geladots-swiper,
+    .geladots-pagination {
+        display: none !important;
+    }
+
+    .geladots-grid-desktop {
+        display: grid;
+        grid-template-columns: repeat(4, 1fr);
+        max-width: 80%;
+        margin: 0 auto;
+        padding-bottom: 20px;
+    }
+
+    .bombon-desktop {
+        width: 300px;
+        height: 300px;
+        border-radius: 50%;
+        object-fit: cover;
+    }
+
+    .geladots-big-title {
+        font-size: 300px;
+    }
+
+    .geladots-img-final-img {
+        max-height: 1169px;
+    }
+    
+    .geladots-anatomy {
+        height: 450px;
+        padding: 0 20px;
+    }
+
+    .geladots-anatomy-inner {
+        display: flex;
+        flex-direction: row;
+        align-items: center;
+        justify-content: center;
+        gap: 80px;
+    }
+
+    .root-title {
+        flex-direction: row;
+        gap: 10px;
+    }
+
+    .geladots-variedades-title-white,
+    .geladots-variedades-title-strong-white {
+        font-size: 70px !important;
+        line-height: 65px !important;
+        text-align: left;
+    }
+
+    .geladots-anatomy-bombon {
+        margin-top: 0;
+        justify-content: center;
+        gap: 40px;
+        flex-shrink: 0;
+    }
+
+    .geladots-anatomy-img {
+        width: 600px;
+        height: 500px;
+        left: 0;
+    }
+
+    .anatomy-item p {
+        font-size: 14px;
+    }
+
+    header .wrapper {
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+    }
+
+    header .toggle-nav {
+        order: 1;
+        flex-shrink: 0;
+    }
+
+    header .logo {
+        order: 2;
+        flex-shrink: 0;
+        margin-left: 15px;
+    }
+
+    header .tag {
+        order: 3;
+        position: absolute !important;
+        left: 50%;
+        transform: translateX(-50%) !important;
+        top: auto !important;
+        pointer-events: none;
+        display: block !important;
+    }
+
+    header .header-right {
+        order: 4;
+        flex-shrink: 0;
+        margin-left: auto;
+    }
+
+    header:not(.bg-grey) .toggle-nav span {
+        background: #fff;
+    }
+
+    header:not(.bg-grey) .lang {
+        color: #fff;
+    }
+
+    header .tag {
+        font-size: 18px;
+        color: #fff !important;
+        opacity: 1 !important;
+        font-weight: 400;
+    }
+
+    .geladots-variedades-title,
+    .geladots-variedades-title-strong {
+        font-size: 50px;
+    }
+
+    .geladots-bottom-text p {
+        color: #1A1A1A;
+        font-family: Calibre;
+        font-size: 24px;
+        font-style: normal;
+        font-weight: 700;
+        line-height: 24px;
+        letter-spacing: 0.2px;
+        position: relative;
+        top: -50px;
+        margin-bottom: -120px;
+    }
+
+    .geladots-anatomy-lines {
+        left: -250px;
+    }
+
+    .bombon-circle-overlay {
+        width: 161px;
+        height: 161px;
+    }
+
+    .geladots-hero {
+        min-height: 135vh;
+        position: relative;
+        overflow: hidden;
+        height: auto;
+    }
+
+    .dot {
+        font-size: 90px!important;
+    }
+}
+
+.geladots-hero-img {
+    opacity: 0;
+}
+
+.geladots-bombon {
+    opacity: 0;
+}
+
+.bombon-reveal-wrap {
+    position: relative;
+    display: inline-block;
+    cursor: pointer;
+}
+
+.bombon-circle-overlay {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%) scale(0);
+    width: 144px;
+    height: 144px;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    pointer-events: none;
+}
+
+.bombon-circle-label {
+    text-transform: uppercase;
+    padding: 0 8px;
+    color: #FFF;
+    text-align: center;
+    font-family: Calibre;
+    font-size: 20px;
+    font-style: normal;
+    font-weight: 900;
+    line-height: 24px;
+    letter-spacing: 0.2px;
+    margin-top: 12px;
+}
+
+/* Colores por gusto */
+.flavor-dulce-de-leche   { background-color: #E7AA67; }
+.flavor-chocolate-dark   { background-color: #381507; }
+.flavor-menta            { background-color: #93B191; }
+.flavor-maracuya         { background-color: #F5CA00; }
+.flavor-pistacchio        { background-color: #B9A976; }
+.flavor-sambayon         { background-color: #F2D8AC; }
+.flavor-mango            { background-color: #FBD500; }
+.flavor-mandarina        { background-color: #EEAE53; }
+.flavor-chocolate-blanco { background-color: #EBD2B6; }
+.flavor-chocolate-leche  { background-color: #955137; }
+.flavor-frambuesa        { background-color: #BB3D52; }
+.flavor-frutilla         { background-color: #F6917F; }
+
+@media screen and (min-width: 800px) and (max-width: 1100px) {
+    .tag.desktop.enter-y-r.delay-1 {
+        display: none!important;
+    }
+}
+
+@media(max-width: 900px) {
+    .menu-item span {
+        font-size: 19px;
+    }
+}
+
+/* Accessibility: improve contrast for footer links */
+footer .navigation .left .column a.link-dot {
+    color: rgba(255, 255, 255, 0.85);
+}
+
+footer .navigation .left .column a.link-dot:hover {
+    color: #fff;
+}
+
+footer .bottom .copy a,
+footer .bottom .copy .link-dot,
+footer .bottom .link-dot {
+    color: rgba(255, 255, 255, 0.85);
+}
+
+footer .bottom .copy a:hover,
+footer .bottom .link-dot:hover {
+    color: #fff;
+}
+
+footer .bottom {
+    color: rgba(255, 255, 255, 0.85);
+}
+
+/* Accessibility: h3 inherits h5 styles for heading hierarchy fix */
+.products-slide-title h3,
+.news-section h3,
+.partners h3 {
+    font-weight: 900;
+    display: inline-block;
+    position: relative;
+    text-transform: uppercase;
+    font-size: 28px;
+    line-height: 1.07;
+    letter-spacing: -1.6px;
+}
+
+.products-slide-title h3 .line,
+.news-section h3 .line,
+.partners h3 .line {
+    width: 0;
+    height: 1px;
+    position: absolute;
+    left: 0;
+    top: -15px;
+    background: rgba(34, 34, 34, 0.2);
+    transition: 0.6s cubic-bezier(0.25, 0.8, 0.25, 1);
+}
+
+h3.little .line {
+    background: #fff;
+}
+
+h3.little {
+    font-size: 14px;
+    font-weight: 700;
+    letter-spacing: 2px;
+}
+
+.geladots-ohmydot-title p span {
+    display: inline-block;
+}
+
+
+.geladot {
+    width: 80%!important;
+}
+
+.header-store-button {
+    color: #FFF;
+    text-align: center;
+    font-family: Calibre;
+    font-size: 14px;
+    font-style: normal;
+    font-weight: 700;
+    line-height: 16px;
+    max-width: 200px;
+    margin-top: -3px;
+    height: 22px;
+    padding: 5px 8px 10px 10px;
+    letter-spacing: 0;
+}
+
+.header-store-button span:last-child {
+    top: 22px;
+}
+
+.header-store-button:hover span:last-child {
+    top: 5px!important;
+}
+
+.header-store-button:hover span:first-child {
+    transform: translateY(-20px)!important;
+}
+
+@media screen and (max-width: 900px) {
+    .header-store-button {
+        display: none;
+    }
+}

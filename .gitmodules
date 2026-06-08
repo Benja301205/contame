@@ -1,0 +1,12 @@
+[submodule "material/trama-bootcamp/bootcamp-trama-dashboard"]
+	path = material/trama-bootcamp/bootcamp-trama-dashboard
+	url = https://github.com/Benja301205/bootcamp-trama-dashboard.git
+[submodule "material/luccianos/luccianos-dashboard"]
+	path = material/luccianos/luccianos-dashboard
+	url = https://github.com/Benja301205/luccianos-dashboard.git
+[submodule "material/gastro-pipe/dashboard-gastro-pipe"]
+	path = material/gastro-pipe/dashboard-gastro-pipe
+	url = https://github.com/Benja301205/dashboard-gastro-pipe.git
+[submodule "material/proyecto-contame/contame-bariloche-dashboard"]
+	path = material/proyecto-contame/contame-bariloche-dashboard
+	url = https://github.com/Benja301205/bariloche-reviews-dashboard.git

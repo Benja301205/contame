@@ -1,0 +1,462 @@
+<!doctype html>
+<html lang="es">
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>Contame — Sprint del problema</title>
+<style>
+  :root {
+    --bg: #f7f5ef;
+    --ink: #1a1a1a;
+    --muted: #5a5a5a;
+    --accent: #2b5fff;
+    --accent-soft: #e6ecff;
+    --warn: #b85c00;
+    --warn-soft: #fff3e6;
+    --bad: #b3261e;
+    --bad-soft: #fde7e6;
+    --ok: #1f7a3a;
+    --ok-soft: #e3f5e9;
+    --line: #e3dfd4;
+  }
+  * { box-sizing: border-box; }
+  html, body {
+    margin: 0; padding: 0;
+    background: var(--bg); color: var(--ink);
+    font-family: -apple-system, BlinkMacSystemFont, "Inter", "Segoe UI", Roboto, sans-serif;
+    height: 100%;
+  }
+  body { overflow: hidden; }
+  .deck { position: relative; height: 100vh; width: 100vw; }
+  .slide {
+    position: absolute; inset: 0;
+    padding: 5vh 8vw;
+    display: none;
+    flex-direction: column;
+    overflow-y: auto;
+  }
+  .slide.active { display: flex; }
+  .eyebrow {
+    font-size: 0.85rem; letter-spacing: 0.18em; text-transform: uppercase;
+    color: var(--muted); margin-bottom: 0.8rem;
+  }
+  h1 {
+    font-size: clamp(2.4rem, 5vw, 4rem);
+    line-height: 1.05; letter-spacing: -0.02em; margin: 0 0 1.5rem;
+  }
+  h2 {
+    font-size: clamp(1.6rem, 3vw, 2.4rem);
+    line-height: 1.15; letter-spacing: -0.01em; margin: 0 0 1.5rem;
+  }
+  h3 {
+    font-size: 1.15rem; margin: 1.4rem 0 0.6rem;
+    color: var(--ink); font-weight: 600;
+  }
+  p, li { font-size: 1.05rem; line-height: 1.55; color: var(--ink); }
+  .lead { font-size: 1.25rem; max-width: 64ch; color: var(--muted); }
+  .three-lines { display: flex; flex-direction: column; gap: 1.2rem; max-width: 75ch; }
+  .three-lines .line {
+    background: white; border: 1px solid var(--line); border-left: 4px solid var(--accent);
+    padding: 1.1rem 1.4rem; border-radius: 6px;
+    font-size: 1.15rem; line-height: 1.5;
+  }
+  .three-lines .line .num {
+    display: inline-block; font-weight: 700; color: var(--accent); margin-right: 0.5rem;
+  }
+  .grid-2 { display: grid; grid-template-columns: 1fr 1fr; gap: 1.6rem; }
+  .grid-3 { display: grid; grid-template-columns: repeat(3, 1fr); gap: 1.2rem; }
+  .card {
+    background: white; border: 1px solid var(--line);
+    padding: 1.1rem 1.3rem; border-radius: 6px;
+  }
+  .card h4 { margin: 0 0 0.5rem; font-size: 1rem; font-weight: 600; }
+  .card p { margin: 0; font-size: 0.95rem; color: var(--muted); }
+  .stat {
+    background: white; border: 1px solid var(--line); border-radius: 6px;
+    padding: 1.2rem; text-align: left;
+  }
+  .stat .num {
+    font-size: 2.2rem; font-weight: 700; letter-spacing: -0.02em;
+    color: var(--accent); display: block; line-height: 1;
+  }
+  .stat .lbl { font-size: 0.9rem; color: var(--muted); margin-top: 0.4rem; display: block; }
+  table {
+    border-collapse: collapse; width: 100%; max-width: 100ch;
+    background: white; border: 1px solid var(--line); border-radius: 6px; overflow: hidden;
+    font-size: 0.95rem;
+  }
+  th, td { padding: 0.7rem 0.9rem; text-align: left; border-bottom: 1px solid var(--line); }
+  th { background: #efe9d8; font-weight: 600; }
+  tr:last-child td { border-bottom: none; }
+  .pill { display: inline-block; padding: 2px 10px; border-radius: 100px; font-size: 0.78rem; font-weight: 600; }
+  .pill.alta { background: var(--bad-soft); color: var(--bad); }
+  .pill.media { background: var(--warn-soft); color: var(--warn); }
+  .pill.baja { background: var(--ok-soft); color: var(--ok); }
+  .callout {
+    background: var(--accent-soft); border-left: 4px solid var(--accent);
+    padding: 1rem 1.2rem; border-radius: 6px; margin-top: 1.2rem;
+    max-width: 80ch;
+  }
+  .callout.warn { background: var(--warn-soft); border-color: var(--warn); }
+  .callout.bad { background: var(--bad-soft); border-color: var(--bad); }
+  .callout.ok { background: var(--ok-soft); border-color: var(--ok); }
+  ul { padding-left: 1.3rem; margin: 0.5rem 0; }
+  ul li { margin-bottom: 0.4rem; }
+  .nav {
+    position: fixed; bottom: 20px; right: 24px; z-index: 10;
+    display: flex; gap: 8px; align-items: center;
+    background: white; border: 1px solid var(--line); border-radius: 100px;
+    padding: 6px 14px; box-shadow: 0 2px 10px rgba(0,0,0,0.04);
+  }
+  .nav button {
+    border: none; background: transparent; cursor: pointer;
+    font-size: 1.1rem; padding: 4px 10px; color: var(--ink);
+    border-radius: 100px;
+  }
+  .nav button:hover { background: var(--bg); }
+  .nav .counter { font-variant-numeric: tabular-nums; font-size: 0.9rem; color: var(--muted); }
+  .footer-tag {
+    position: fixed; bottom: 24px; left: 28px; z-index: 10;
+    font-size: 0.78rem; color: var(--muted); letter-spacing: 0.1em; text-transform: uppercase;
+  }
+  .cover {
+    justify-content: center; align-items: flex-start;
+    background: linear-gradient(135deg, #f7f5ef 0%, #efe9d8 100%);
+  }
+  .cover h1 { font-size: clamp(3.5rem, 8vw, 6rem); margin-bottom: 0.5rem; }
+  .cover .sub { font-size: 1.4rem; color: var(--muted); max-width: 50ch; }
+  .cover .meta { margin-top: 2rem; font-size: 0.9rem; color: var(--muted); letter-spacing: 0.1em; text-transform: uppercase; }
+  .verdict {
+    display: inline-block; padding: 6px 14px; border-radius: 100px;
+    font-weight: 600; font-size: 0.95rem; margin-bottom: 1rem;
+  }
+  .verdict.go { background: var(--ok-soft); color: var(--ok); }
+  small.note { font-size: 0.78rem; color: var(--muted); display: block; margin-top: 1rem; }
+</style>
+</head>
+<body>
+
+<div class="deck">
+
+  <!-- 1. Cover -->
+  <section class="slide cover active">
+    <div class="eyebrow">Sprint de validación · 1 hora</div>
+    <h1>Contame</h1>
+    <p class="sub">Un oído inteligente que escucha lo que dicen los clientes de tu cadena gastronómica.</p>
+    <div class="meta">Pulir el problema · Validarlo · Decidir si seguimos</div>
+  </section>
+
+  <!-- 2. El problema -->
+  <section class="slide">
+    <div class="eyebrow">El problema · 3 líneas</div>
+    <h2>El dueño no puede accionar sobre los problemas reales de sus clientes</h2>
+    <div class="three-lines">
+      <div class="line"><span class="num">1.</span>El dueño de una cadena gastronómica de 2 a 15 locales quiere mejorar la experiencia de sus clientes, pero <strong>no puede ver los problemas reales</strong> que están pasando en su negocio.</div>
+      <div class="line"><span class="num">2.</span>El feedback existe — Google Reviews, comentarios al mozo, redes, formularios — pero llega <strong>disperso, sin patrón y sin priorización</strong>. No distingue qué es ruido, qué es real, ni qué sucursal lo está sufriendo.</div>
+      <div class="line"><span class="num">3.</span>Sin esa visibilidad, <strong>no puede accionar sobre las causas</strong>. Apaga quejas individuales mientras los mismos problemas se repiten en silencio en sus locales.</div>
+    </div>
+  </section>
+
+  <!-- 3. Cliente target -->
+  <section class="slide">
+    <div class="eyebrow">Cliente target</div>
+    <h2>Dueño-operador de cadena gastronómica de 2 a 15 locales en LATAM</h2>
+    <div class="grid-2">
+      <div class="card">
+        <h4>Por qué este perfil</h4>
+        <ul>
+          <li>El dolor es <strong>estructural</strong>: no puede estar en todos lados.</li>
+          <li>Multi-sucursal hace que el feature core (comparar entre locales) tenga sentido.</li>
+          <li>ARPU defendible: USD 80–500/mes según tamaño.</li>
+          <li>Decisor único con presupuesto MarTech ya asignado.</li>
+        </ul>
+      </div>
+      <div class="card">
+        <h4>Qué le importa (motivaciones reales)</h4>
+        <ul>
+          <li><strong>Que cada local funcione bien</strong>, no solo la marca en agregado.</li>
+          <li>Una sucursal mala <strong>contamina al resto</strong> en búsquedas de Google.</li>
+          <li>Fricción con franquiciados / encargados cuando bajan los números.</li>
+          <li>Costo operativo real: empleado mal entrenado o producto mal hecho = pérdida directa.</li>
+        </ul>
+      </div>
+    </div>
+    <div class="callout">
+      <strong>Punto de quiebre:</strong> el dolor empieza en el <em>segundo local</em>, no en el cuarto. Por eso abrimos el rango a 2–15.
+    </div>
+  </section>
+
+  <!-- 4. Validación del problema -->
+  <section class="slide">
+    <div class="eyebrow">Validación del problema · data 2024–2026</div>
+    <h2>El dolor está documentado y es medible</h2>
+    <div class="grid-3" style="margin-bottom: 1.2rem;">
+      <div class="stat"><span class="num">71%</span><span class="lbl">de clientes se quedan callados después de una mala experiencia (Qualtrics XM)</span></div>
+      <div class="stat"><span class="num">90%</span><span class="lbl">de los insatisfechos que no se quejan, simplemente no vuelven (Toast 2025)</span></div>
+      <div class="stat"><span class="num">53%</span><span class="lbl">de los comensales nunca o casi nunca dejan review</span></div>
+    </div>
+    <div class="grid-3" style="margin-bottom: 1.2rem;">
+      <div class="stat"><span class="num">65%</span><span class="lbl">SÍ deja review si la empresa la pide activamente</span></div>
+      <div class="stat"><span class="num">5–9%</span><span class="lbl">de revenue por cada estrella en Google (Luca, HBS)</span></div>
+      <div class="stat"><span class="num">70%</span><span class="lbl">de la facturación gastro viene de recurrentes</span></div>
+    </div>
+    <h3>Cómo lo validamos en discovery</h3>
+    <div class="callout">
+      <strong>La pregunta letal:</strong> "¿Podés decirme hoy cuáles son los 3 problemas recurrentes de tu sucursal X en los últimos 30 días?"<br>
+      Si el dueño no puede → problema validado.
+    </div>
+  </section>
+
+  <!-- 5. J-curve insight -->
+  <section class="slide">
+    <div class="eyebrow">El insight central · sesgo J-curve</div>
+    <h2>Google Reviews te da los aplausos y los gritos. Los problemas reales están en el medio.</h2>
+    <div class="grid-2">
+      <div class="card">
+        <h4>Qué es el J-curve</h4>
+        <p>Las reviews online tienen distribución en J: muchísimas 5★, un grupito de 1★, casi nada en el medio. Documentado en MIS Quarterly y HBS.</p>
+        <p style="margin-top: 0.8rem;">Lo causa la combinación de dos sesgos: <strong>acquisition bias</strong> (los fans escriben más) + <strong>underreporting bias</strong> (solo los extremos sienten urgencia de publicar).</p>
+      </div>
+      <div class="card">
+        <h4>Por qué importa para Contame</h4>
+        <ul>
+          <li>El cliente <em>medio</em> —el que tuvo una experiencia <em>meh</em> y no vuelve— <strong>nunca publica nada</strong>.</li>
+          <li>Ahí están los <strong>problemas operativos reales</strong>: mozo lento, plato cambió, hace calor, baño sucio.</li>
+          <li>Solo los capturás si los <strong>pedís activamente</strong> (QR, WhatsApp post-visita, form).</li>
+          <li>65–69% deja feedback si la empresa lo pide → la mecánica funciona.</li>
+        </ul>
+      </div>
+    </div>
+    <div class="callout">
+      <strong>Por qué nuestro MVP es la combinación correcta:</strong> scraping de Google capta los extremos (J-curve) + QR/form/WhatsApp captan el medio accionable + LLM cruza ambos y encuentra patrones que ni uno ni otro mostraban solo.
+    </div>
+  </section>
+
+  <!-- 5. Mercado -->
+  <section class="slide">
+    <div class="eyebrow">Tamaño de mercado</div>
+    <h2>Mediano, defendible, con vientos de cola</h2>
+    <div class="grid-3" style="margin-bottom: 1.2rem;">
+      <div class="stat"><span class="num">~25–30k</span><span class="lbl">cadenas gastro 2–15 locales en LATAM (TAM)</span></div>
+      <div class="stat"><span class="num">~$60M</span><span class="lbl">USD/año TAM a ARPU $200/mes</span></div>
+      <div class="stat"><span class="num">~$330k</span><span class="lbl">ARR año 2 con 1% de penetración en 3 países</span></div>
+    </div>
+    <h3>Por qué AHORA</h3>
+    <ul>
+      <li><strong>LLMs</strong> hacen viable el análisis de texto libre sin equipo de data.</li>
+      <li><strong>WhatsApp Business API</strong> abierta y barata desde 2022 → canal de delivery nativo en LATAM.</li>
+      <li><strong>Cadenas chicas</strong> son el segmento que más crece en gastro post-pandemia.</li>
+      <li>Google Reviews ya es el canal #1 de descubrimiento local en LATAM.</li>
+    </ul>
+    <small class="note">Estimación de cadenas en Argentina (~3k) es aproximación propia. Validar con FEHGRA antes de citar.</small>
+  </section>
+
+  <!-- 6. Competencia internacional -->
+  <section class="slide">
+    <div class="eyebrow">Competencia internacional · valida que el mercado paga</div>
+    <h2>Hay miles de millones invertidos en este problema</h2>
+    <table>
+      <thead><tr><th>Player</th><th>Foco</th><th>Tamaño</th></tr></thead>
+      <tbody>
+        <tr><td><strong>Birdeye</strong></td><td>Multi-location reviews + mensajería</td><td>80k clientes, $146.8M revenue 2024</td></tr>
+        <tr><td><strong>Podium</strong></td><td>Reviews + mensajería SMB</td><td>$3B valuación, 90k negocios, $219M revenue 2024</td></tr>
+        <tr><td><strong>Ovation</strong></td><td>Gastro multi-location, SMS 2-preguntas + AI</td><td>3.000 restaurantes, $12M funding total</td></tr>
+        <tr><td><strong>Yumpingo</strong></td><td>Gastro UK, sentiment por plato</td><td>Cadenas tipo Wagamama</td></tr>
+        <tr><td><strong>Medallia / Qualtrics</strong></td><td>Enterprise CX</td><td>$6B+ en exits, fuera del segmento</td></tr>
+      </tbody>
+    </table>
+    <div class="callout ok">
+      <strong>Buena noticia:</strong> 3+ unicornios. El problema vale dinero real y los inversores lo creen. Nos ahorra evangelizar.
+    </div>
+  </section>
+
+  <!-- 7. Competencia LATAM + gap -->
+  <section class="slide">
+    <div class="eyebrow">Competencia LATAM + sustitutos</div>
+    <h2>El competidor real hoy es "no hacer nada sistemático"</h2>
+    <div class="grid-2">
+      <div class="card">
+        <h4>LATAM directo</h4>
+        <ul>
+          <li><strong>Yogo</strong> (Arg): gestión operativa, no feedback CX inteligente.</li>
+          <li><strong>Opinaia, Easyfeedback</strong>: encuestas tradicionales, sin IA ni WhatsApp.</li>
+          <li><strong>Customer Alliance, Trustmary</strong>: foco hoteles.</li>
+        </ul>
+        <p><strong>Nadie en el sweet spot 2–15 locales gastro LATAM con WhatsApp-first.</strong></p>
+      </div>
+      <div class="card">
+        <h4>Lo que el dueño usa HOY</h4>
+        <ul>
+          <li>Dashboard de Google Business Profile.</li>
+          <li>Excel + leer reviews manual.</li>
+          <li>Mystery shopper (caro, mensual).</li>
+          <li>"Le pregunto al encargado" (sesgo).</li>
+          <li>Typeform/Google Forms ad-hoc.</li>
+        </ul>
+      </div>
+    </div>
+  </section>
+
+  <!-- 8. Diferenciación -->
+  <section class="slide">
+    <div class="eyebrow">Diferenciación · 4 ángulos defendibles</div>
+    <h2>Por qué nosotros podemos ganar</h2>
+    <div class="grid-2">
+      <div class="card">
+        <h4>1. WhatsApp-first, no dashboard-first</h4>
+        <p>Llegamos donde el dueño ya vive. Birdeye/Podium entregan en dashboards que nadie abre.</p>
+      </div>
+      <div class="card">
+        <h4>2. LATAM-native</h4>
+        <p>Español rioplatense/mexicano, precio en USD ajustado al segmento, integración con POS locales.</p>
+      </div>
+      <div class="card">
+        <h4>3. Patrones accionables, no métricas</h4>
+        <p>No te damos un NPS. Te decimos "sucursal Palermo: espera del mozo después de las 21h — 4 menciones en 7 días".</p>
+      </div>
+      <div class="card">
+        <h4>4. Sweet spot 2–15 locales</h4>
+        <p>Medallia/Qualtrics no nos miran. Birdeye/Podium no llegan a LATAM con foco. Nicho desatendido.</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- 9. La contra honesta -->
+  <section class="slide">
+    <div class="eyebrow">La contra · lo que el grupo va a atacar</div>
+    <h2>Cinco cosas que tenemos que tener respuesta</h2>
+    <div class="grid-2">
+      <div class="card">
+        <h4>1. "Luca dice que el rating no afecta cadenas"</h4>
+        <p>Luca estudió cadenas <em>establecidas</em> tipo Starbucks/McDonald's. Tu target (2–15 locales LATAM) no entra ahí — el cliente las descubre por Google y SÍ compara ratings. Además, el dueño quiere que <strong>cada local funcione bien</strong>, no solo la marca en agregado.</p>
+      </div>
+      <div class="card">
+        <h4>2. Ovation ya hace casi esto</h4>
+        <p>SMS 2-preguntas + AI + multi-location, 3k restaurantes en EE.UU. Nuestro moat es WhatsApp-first + LATAM + integración con POS locales.</p>
+      </div>
+      <div class="card">
+        <h4>3. "Ya tengo Google Reviews, ¿para qué Contame?"</h4>
+        <p>Google Reviews tiene <strong>sesgo J-curve</strong>: solo ves aplausos y gritos. El cliente medio —el accionable— no publica. Contame captura ese feedback medio y cruza con Google para mostrar el patrón real.</p>
+      </div>
+      <div class="card">
+        <h4>4. Cadenas chicas tienen sustitutos gratis</h4>
+        <p>Google Business Profile + leer manual + WhatsApp. Tenemos que probar que "ahorro de tiempo + priorización + cruce de fuentes" justifica USD 80–500/mes.</p>
+      </div>
+    </div>
+    <div class="callout warn" style="margin-top: 1.2rem;">
+      <strong>5. Adopción del QR es baja (2–5%).</strong> No podemos depender solo de él. Por eso arquitectura multi-fuente: Google (60%) + QR post-pago (20%) + WhatsApp post-visita (15%) + incentivo (5%).
+    </div>
+  </section>
+
+  <!-- 10. Riesgos de implementación -->
+  <section class="slide">
+    <div class="eyebrow">Riesgos de implementación + soluciones</div>
+    <h2>Los 5 que matan el producto si no los resolvemos</h2>
+    <table>
+      <thead><tr><th>Riesgo</th><th>Prob.</th><th>Solución</th></tr></thead>
+      <tbody>
+        <tr>
+          <td><strong>Volumen de feedback insuficiente</strong></td>
+          <td><span class="pill alta">Alta</span></td>
+          <td>Mix 4 fuentes: Google 60% + QR post-pago 20% + WhatsApp post-visita 15% + incentivo 5%</td>
+        </tr>
+        <tr>
+          <td><strong>Patrones LLM poco accionables</strong></td>
+          <td><span class="pill media">Media-alta</span></td>
+          <td>Framework de severidad fijo + validación humana primeros 3 meses + comparativo entre sucursales como ancla</td>
+        </tr>
+        <tr>
+          <td><strong>El dueño no lee el WhatsApp</strong></td>
+          <td><span class="pill alta">Alta</span></td>
+          <td>Formato testeado en discovery + alertas push spike + resumen semanal corto + meta apertura &gt;70%</td>
+        </tr>
+        <tr>
+          <td><strong>Google bloquea scraping</strong></td>
+          <td><span class="pill media">Media</span></td>
+          <td>Google Business Profile API oficial + diversificar fuentes desde día 1</td>
+        </tr>
+        <tr>
+          <td><strong>Ovation/Birdeye entran a LATAM</strong></td>
+          <td><span class="pill media">Media</span></td>
+          <td>Velocidad (18 meses ventana) + moat WhatsApp profundo + integraciones POS locales (Fudo, Maxirest)</td>
+        </tr>
+      </tbody>
+    </table>
+  </section>
+
+  <!-- 11. Plan de validación -->
+  <section class="slide">
+    <div class="eyebrow">Plan de validación · próximas 2 semanas</div>
+    <h2>Tres pruebas antes de construir el MVP</h2>
+    <div class="grid-3">
+      <div class="card">
+        <h4>1. Entrevistas</h4>
+        <p>5 dueños de cadenas 2–15 locales gastro. Pregunta letal: "¿Cuáles son los 3 problemas recurrentes de tu sucursal X en los últimos 30 días?"</p>
+        <p><strong>Pasa si</strong>: 4 de 5 no pueden responder con datos.</p>
+      </div>
+      <div class="card">
+        <h4>2. Mock-up</h4>
+        <p>Imagen del resumen de WhatsApp mostrada a esos 5. Pregunta: "¿Pagarías $X por esto? ¿Lo abrirías cada lunes?"</p>
+        <p><strong>Pasa si</strong>: 3 de 5 dicen sí + dan número de pricing.</p>
+      </div>
+      <div class="card">
+        <h4>3. Test de volumen</h4>
+        <p>1 local amigo, 1 semana scrapeando Google + QR post-pago.</p>
+        <p><strong>Pasa si</strong>: 30+ piezas de feedback útil por local por semana.</p>
+      </div>
+    </div>
+    <div class="callout">
+      <strong>Si las 3 pasan</strong> → MVP en 4–6 semanas.<br>
+      <strong>Si fallan 2+</strong> → pivot (ej. indies) o kill.
+    </div>
+  </section>
+
+  <!-- 12. Conclusión -->
+  <section class="slide">
+    <div class="eyebrow">Verdict del sprint</div>
+    <span class="verdict go">SEGUIMOS — condicionado al plan de validación</span>
+    <h2>Por qué vale la pena el discovery</h2>
+    <ul style="max-width: 80ch; font-size: 1.1rem;">
+      <li><strong>Problema validado por mercado internacional</strong>: Birdeye $146M ARR, Podium $3B valuación, Ovation 3k restaurantes.</li>
+      <li><strong>Gap real en LATAM</strong>: nadie cubre el sweet spot 2–15 locales con WhatsApp-first.</li>
+      <li><strong>Timing</strong>: convergencia de LLMs + WhatsApp API + crecimiento cadenas chicas post-pandemia.</li>
+      <li><strong>Ventana competitiva</strong>: 18–24 meses antes de que entren los grandes.</li>
+      <li><strong>Riesgo principal medible</strong>: volumen de feedback + adopción del dueño. Lo validamos en 2 semanas, no asumimos.</li>
+    </ul>
+    <div class="callout ok" style="margin-top: 1.5rem;">
+      <strong>Próximo paso:</strong> agendar 5 entrevistas con dueños de cadenas esta semana. Si en 14 días tenemos 4 de 5 validaciones positivas → construimos.
+    </div>
+  </section>
+
+</div>
+
+<div class="footer-tag">Contame · Sprint del problema</div>
+
+<div class="nav">
+  <button id="prev" aria-label="Anterior">←</button>
+  <span class="counter"><span id="cur">1</span> / <span id="total">13</span></span>
+  <button id="next" aria-label="Siguiente">→</button>
+</div>
+
+<script>
+  const slides = document.querySelectorAll('.slide');
+  const total = slides.length;
+  document.getElementById('total').textContent = total;
+  let i = 0;
+  function show(n) {
+    i = (n + total) % total;
+    slides.forEach((s, idx) => s.classList.toggle('active', idx === i));
+    document.getElementById('cur').textContent = i + 1;
+  }
+  document.getElementById('prev').onclick = () => show(i - 1);
+  document.getElementById('next').onclick = () => show(i + 1);
+  document.addEventListener('keydown', (e) => {
+    if (e.key === 'ArrowRight' || e.key === ' ' || e.key === 'PageDown') show(i + 1);
+    if (e.key === 'ArrowLeft' || e.key === 'PageUp') show(i - 1);
+    if (e.key === 'Home') show(0);
+    if (e.key === 'End') show(total - 1);
+  });
+</script>
+
+</body>
+</html>
